@@ -1,7 +1,7 @@
 #include "main.h"
 /**
 * _islower - prints 1 or 0 depending on input
-* @c: character to be checked 
+* @c: character to be checked
 * Description: prints all lowercase letters
 * Return: Always(0).
 */
