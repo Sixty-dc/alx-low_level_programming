@@ -1,61 +1,55 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
-* infinite_add - add two numbers
-* @n1: first number
-* @n2: second number
-* @r: the buffer
-* @size_r: the size of r
-* Return: char
+* infinite_add - adds two numbers
+* @n1: number one.
+* @n2: number two.
+* @r: buffer that the function will use to store the result.
+* @size_r: buffer size:
+* Return: the pointer to dest.
 */
 
 char *infinite_add(char *n1, char *n2, char *r, int size_r)
 {
-int i = 0;
-int j = 0;
-int count = 0;
-int digit = 0;
-unsigned int digitval;
-unsigned int value1 = 0;
-unsigned int value2 = 0;
-unsigned int value3 = 0;
-char *p = r;
+int c1 = 0, c2 = 0, op, bg, dr1, dr2, add = 0;
 
-while (n1[i + 1])
-{
-n1++;
-i++;
-}
-while (i)
-{
-value1 += n1[i] - '0';
-i--;
-}
-while (n2[j + 1])
-{
-n2++;
-j++;
-}
-while (j)
-{
-value2 += n2[j - '0'];
-j--;
-}
-value3 = value1 + value2;
-digitval = value3;
-while (digitval / 10)
-{
-count += 1;
-digitval /= 10;
-}
-count += 1;
-if (count > size_r)
+while (*(n1 + c1) != '\0')
+c1++;
+while (*(n2 + c2) != '\0')
+c2++;
+if (c1 >= c2)
+bg = c1;
+else
+bg = c2;
+if (size_r <= bg + 1)
 return (0);
-for (; count; count--)
+r[bg + 1] = '\0';
+c1--, c2--, size_r--;
+dr1 = *(n1 + c1) -48, dr2 = *(n2 + c2) -48;
+while (bg >= 0)
 {
-digit = (value3 % 10);
-value3 = (value3 - digit);
-r[count] = digit + '0';
+op = dr1 + dr2 + add;
+if (op >= 10)
+add = op / 10;
+else
+add = 0;
+if (op > 0)
+*(r + bg) = (op % 10) + 48;
+else
+*(r + bg) = '0';
+if (c1 > 0)
+c1--, dr1 = *(n1 + c1) -48;
+else
+dr1 = 0;
+if (c2 > 0)
+c2--, dr2 = *(n2 + c2) -48;
+else
+dr2 = 0;
+bg--, size_r--;
 }
-return (p);
+if (*(r) == '0')
+return (r + 1);
+else
+return (r);
 }
