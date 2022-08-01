@@ -55,7 +55,7 @@ if (new_name == NULL)
 }
 free(snoopie);
 return (NULL);
-}
+{
 (*snoopie).name = new_name;
 (*snoopie).age = age;
 new_owner = _copy(owner);
