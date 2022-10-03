@@ -1,21 +1,41 @@
 #include "main.h"
+#include <stdio.h>
 /**
-* _atoi - changes a string to an int
-* @s: the string to be changed
-*
-* Return: the converted int
-*/
+ * _atoi - gets sign and numbers of string
+ * @s: array
+ * Return: gets numbers with its sign
+ */
 int _atoi(char *s)
 {
-int i = 1;
-unsigned int num = 0;
-do {
-if (*s == '-')
-i *= -1;
-else if (*s >= '0' && *s <= '9')
-num = num * 10 + (*s - '0');
-else if (num > 0)
-break;
-} while (*s++);
-return (num *i);
+	unsigned int cont1 = 0, a, b, c, num = 0, tam;
+	int aux2 = 1;
+
+	while (*(s + cont1) != '\0')
+	{
+		cont1++;
+	}
+	for (a = 0; a < cont1; a++)
+	{
+		if (*(s + a) >= '0' && *(s + a) <= '9')
+			break;
+	}
+	for (b = a; b < cont1; b++)
+	{
+		if (!(*(s + b) >= '0' && *(s + b) <= '9'))
+			break;
+	}
+	for (c = 0; c < a; c++)
+	{
+		if (*(s + c) == '-')
+			aux2 = aux2 * (-1);
+	}
+	tam = b - a;
+	while (tam >= 1)
+	{
+		num = (num * 10) + (*(s + a) - '0');
+		a++;
+		tam--;
+	}
+	num = num * aux2;
+	return (num);
 }
